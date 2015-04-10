@@ -24,6 +24,8 @@ call assert #lib formatDate$("1987-08-04", "CC YY MM DD, cc yy mm dd"), "19 87 0
 call assert #lib formatDate$("08/15/1987", "dd/mm/yyyy"), "15/8/1987"
 call assert #lib formatDate$("08/15/1987", "DD-MM-YY"), "15-08-87"
 call assert #lib formatDate$("08/04/1987", "CC YY MM DD, cc yy mm dd"), "19 87 08 04, 19 87 8 4"
+call assert #lib formatDate$("08/04/1987", "mon Mon MON"), "aug Aug AUG"
+call assert #lib formatDate$("1987-08-15", "month,Month,MONTH"), "august,August,AUGUST"
 
 call test "setPathSeparator()"
 call assertn #lib setPathSeparator("|"), 0
