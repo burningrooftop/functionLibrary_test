@@ -17,6 +17,14 @@ call test "adler32()"
 call assertn #lib adler32(""), 1
 call assertn #lib adler32("Hello World"), 403375133
 
+call test "formatDate$()"
+call assert #lib formatDate$("1987-08-15", "dd/mm/yyyy"), "15/8/1987"
+call assert #lib formatDate$("1987-08-15", "DD-MM-YY"), "15-08-87"
+call assert #lib formatDate$("1987-08-04", "CC YY MM DD, cc yy mm dd"), "19 87 08 04, 19 87 8 4"
+call assert #lib formatDate$("08/15/1987", "dd/mm/yyyy"), "15/8/1987"
+call assert #lib formatDate$("08/15/1987", "DD-MM-YY"), "15-08-87"
+call assert #lib formatDate$("08/04/1987", "CC YY MM DD, cc yy mm dd"), "19 87 08 04, 19 87 8 4"
+
 call test "setPathSeparator()"
 call assertn #lib setPathSeparator("|"), 0
 call assertn #lib setPathSeparator("\"), 1
@@ -62,6 +70,11 @@ call assert #lib escapeHTML$("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), "ABCDEFGHIJKLMNOPQRS
 call assert #lib escapeHTML$("0123456789-_.~"), "0123456789-_.~"
 call assert #lib escapeHTML$("!#$&'()*+,/:;=?@[]<> "), "!#$&amp;&#39;()*+,/:;=?@[]&lt;&gt; "
 
+call test "hex$()"
+call assert #lib hex$(""), ""
+call assert #lib hex$("A"), "41"
+call assert #lib hex$("Hello World!"), "48656C6C6F20576F726C6421"
+
 call test "getPrefix$()"
 call assert #lib getPrefix$("Hello world!", "apple"), ""
 call assert #lib getPrefix$("Hello world!", "H"), ""
@@ -78,6 +91,16 @@ call test "extract$()"
 call assert #lib extract$("Hello World!", "hello", "orld"), ""
 call assert #lib extract$("Hello World!", "W", "l"), "or"
 call assert #lib extract$("Hello World!", "H", "!"), "ello World"
+
+call test "lpad$()"
+call assert #lib lpad$("Hello", 8, " "), "   Hello"
+call assert #lib lpad$("Hello", 3, "abc"), "Hello"
+call assert #lib lpad$("Hello", 12, "abc"), "abcabcaHello"
+
+call test "rpad$()"
+call assert #lib rpad$("Hello", 8, " "), "Hello   "
+call assert #lib rpad$("Hello", 3, "abc"), "Hello"
+call assert #lib rpad$("Hello", 12, "abc"), "Helloabcabca"
 
 call test "replace$()"
 call assert #lib replace$("Hello World!", "Hello", "Goodbye"), "Goodbye World!"
