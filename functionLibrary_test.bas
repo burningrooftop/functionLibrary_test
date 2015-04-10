@@ -27,6 +27,22 @@ call assert #lib formatDate$("08/04/1987", "CC YY MM DD, cc yy mm dd"), "19 87 0
 call assert #lib formatDate$("08/04/1987", "mon Mon MON"), "aug Aug AUG"
 call assert #lib formatDate$("1987-08-15", "month,Month,MONTH"), "august,August,AUGUST"
 
+call test "month$()"
+call assert #lib month$(0), ""
+call assert #lib month$(1), "January"
+call assert #lib month$(2), "February"
+call assert #lib month$(3), "March"
+call assert #lib month$(4), "April"
+call assert #lib month$(5), "May"
+call assert #lib month$(6), "June"
+call assert #lib month$(7), "July"
+call assert #lib month$(8), "August"
+call assert #lib month$(9), "September"
+call assert #lib month$(10), "October"
+call assert #lib month$(11), "November"
+call assert #lib month$(12), "December"
+call assert #lib month$(13), ""
+
 call test "setPathSeparator()"
 call assertn #lib setPathSeparator("|"), 0
 call assertn #lib setPathSeparator("\"), 1
